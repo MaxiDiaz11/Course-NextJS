@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { MainLayout } from "../../components/Layouts/MainLayout";
-import { DarkLayout } from "../../components/Layouts/DarkLayout";
+import { MainLayout } from "../components/Layouts/MainLayout";
+import { DarkLayout } from "../components/Layouts/DarkLayout";
 
-export default function PricingPage() {
+export default function AboutPage() {
   return (
     <>
-      <h1>Pricing Page</h1>
+      <h1>About Page</h1>
       <h1 className="tittle">
         Ir a <Link href={"/"}>Home</Link>
       </h1>
 
       <p className="description">
         Get started by editing&nbsp;
-        <code className="code">pages/pricing.tsx</code>
+        <code className="code">pages/about.tsx</code>
       </p>
     </>
   );
 }
 
-PricingPage.getLayout = function getLayout(page) {
+AboutPage.getLayout = function getLayout(page: JSX.Element) {
   return (
     <MainLayout>
       <DarkLayout>{page}</DarkLayout>

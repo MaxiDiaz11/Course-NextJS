@@ -1,8 +1,13 @@
-import { Navbar } from "../../components/Navbar";
-import styles from "../Layouts/MainLayout.module.css";
+import { Navbar } from "../Navbar";
+import { FC } from "react";
 import Head from "next/head";
+import styles from "../Layouts/MainLayout.module.css";
 
-export const MainLayout = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <div>
       <Head>
