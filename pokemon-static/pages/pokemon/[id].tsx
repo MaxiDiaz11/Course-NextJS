@@ -1,15 +1,25 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { Button, Card, Container, Grid, Text, Image } from "@nextui-org/react";
 import { Layout } from "../../components/layouts";
 import { Pokemon } from "../../interfaces";
 import { pokeApi } from "../../api";
+import { localFavorites } from "../../utils";
 
 interface Props {
   pokemon: Pokemon;
 }
 
 const PokemonPage: FC<Props> = ({ pokemon }) => {
+  const [existPokemon, setExistPokemon] = useState(
+    localFavorites.existInFavorites(pokemon.id)
+  );
+
+  const onToggleFavorite = () => {
+    localFavorites.toogleFavorites(pokemon.id);
+    setExistPokemon(!existPokemon);
+  };
+
   return (
     <Layout title={`${pokemon.name}`}>
       <Grid.Container css={{ marginTop: "5px" }} gap={2}>
@@ -36,8 +46,12 @@ const PokemonPage: FC<Props> = ({ pokemon }) => {
               <Text h1 transform="capitalize">
                 {pokemon.name}
               </Text>
-              <Button color="gradient" ghost>
-                Guardar en favoritos
+              <Button
+                color="gradient"
+                ghost={!existPokemon}
+                onPress={onToggleFavorite}
+              >
+                {existPokemon ? "En favoritos" : "Guardar en favoritos"}
               </Button>
             </Card.Header>
             <Card.Body>
