@@ -1,7 +1,8 @@
 import React from "react";
 import { NextPage } from "next";
-import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+import { Card, CardHeader, Grid } from "@mui/material";
 import Layout from "@/components/layouts/Layout";
+import { EntryList, NewEntry } from "@/components/ui";
 
 const HomePage: NextPage = () => {
   return (
@@ -10,20 +11,22 @@ const HomePage: NextPage = () => {
         <Grid item xs={12} sm={4}>
           <Card sx={{ height: "calc(100vh - 100px)" }}>
             <CardHeader title="Pendientes"></CardHeader>
-            <CardContent>
-              {/* Agregar una nueva entrada */}
-              {/* Listado de las entradas */}
-            </CardContent>
+            {/* Agregar una nueva entrada */}
+            {/* Listado de las entradas */}
+            <NewEntry></NewEntry>
+            <EntryList status="pending"></EntryList>
           </Card>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Card sx={{ height: "calc(100vh - 100px)" }}>
             <CardHeader title="En progreso"></CardHeader>
+            <EntryList status="in-progress" />
           </Card>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Card sx={{ height: "calc(100vh - 100px)" }}>
             <CardHeader title="Completadas"></CardHeader>
+            <EntryList status="finished"></EntryList>
           </Card>
         </Grid>
       </Grid>

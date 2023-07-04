@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <EntriesProvider>
       <UIProvider>
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={darkTheme}>
           <CssBaseline></CssBaseline>
           <Component {...pageProps} />
         </ThemeProvider>
