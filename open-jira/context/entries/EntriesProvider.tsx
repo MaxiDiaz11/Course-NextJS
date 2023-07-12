@@ -12,29 +12,7 @@ interface Props {
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
-  entries: [
-    {
-      _id: uuidv4(),
-      description:
-        "PENDIENTE: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, laudantium?",
-      createdAt: Date.now(),
-      status: "pending",
-    },
-    {
-      _id: uuidv4(),
-      description:
-        "EN PROGRESO: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, laudantium?",
-      createdAt: Date.now(),
-      status: "in-progress",
-    },
-    {
-      _id: uuidv4(),
-      description:
-        "TERMINADA: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, laudantium?",
-      createdAt: Date.now(),
-      status: "finished",
-    },
-  ],
+  entries: [],
 };
 
 const EntriesProvider: FC<Props> = ({ children }) => {
@@ -50,9 +28,9 @@ const EntriesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Entry] Add-Entry", payload: newEntry });
   };
 
-  const updateEntry = (entry: Entry) =>{
-    dispatch({type:"[Entry] Update-Entry", payload: entry})
-  }
+  const updateEntry = (entry: Entry) => {
+    dispatch({ type: "[Entry] Update-Entry", payload: entry });
+  };
 
   return (
     <EntriesContext.Provider
@@ -60,7 +38,7 @@ const EntriesProvider: FC<Props> = ({ children }) => {
         ...state,
         //Methods
         addNewEntry,
-        updateEntry
+        updateEntry,
       }}
     >
       {children}
