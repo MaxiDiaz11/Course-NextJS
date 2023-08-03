@@ -1,7 +1,8 @@
-import React, { FC, useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { FC, useEffect, useReducer } from "react";
 import { EntriesContext, EntriesReducer } from "./";
 import { Entry } from "@/interfaces";
+import { entriesApi } from "@/api";
+import { useSnackbar } from "notistack";
 
 export interface EntriesState {
   entries: Entry[];
@@ -16,20 +17,53 @@ const Entries_INITIAL_STATE: EntriesState = {
 };
 
 const EntriesProvider: FC<Props> = ({ children }) => {
-  const [state, dispatch] = useReducer(EntriesReducer, Entries_INITIAL_STATE);
+  const { enqueueSnackbar } = useSnackbar();
 
-  const addNewEntry = (description: string) => {
-    const newEntry: Entry = {
-      _id: uuidv4(),
-      description,
-      createdAt: Date.now(),
-      status: "pending",
-    };
-    dispatch({ type: "[Entry] Add-Entry", payload: newEntry });
+  const refreshEntries = async () => {
+    const { data } = await entriesApi.get<Entry[]>("/entries");
+    console.log(data);
+    dispatch({ type: "[Entry] Refresh-Entry", payload: data });
   };
 
-  const updateEntry = (entry: Entry) => {
-    dispatch({ type: "[Entry] Update-Entry", payload: entry });
+  useEffect(() => {
+    refreshEntries();
+  }, []);
+
+  const [state, dispatch] = useReducer(EntriesReducer, Entries_INITIAL_STATE);
+
+  const addNewEntry = async (description: string) => {
+    const { data } = await entriesApi.post<Entry>("/entries", {
+      description,
+    });
+
+    dispatch({ type: "[Entry] Add-Entry", payload: data });
+  };
+
+  const updateEntry = async (
+    { _id, description, status }: Entry,
+    showSnackbar = false
+  ) => {
+    try {
+      const { data } = await entriesApi.put<Entry>(`/entries/${_id}`, {
+        description,
+        status,
+      });
+
+      dispatch({ type: "[Entry] Update-Entry", payload: data });
+
+      if (showSnackbar) {
+        enqueueSnackbar("Entrada actualizada", {
+          variant: "success",
+          autoHideDuration: 1500,
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "left",
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
