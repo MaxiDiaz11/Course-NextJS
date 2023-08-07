@@ -1,8 +1,13 @@
 import React from "react";
 import { NextPage } from "next";
+import { Layout } from "@/components/layouts";
 
 const HomePage: NextPage = () => {
-  return <h1>Cookie-Master</h1>;
+  return (
+    <Layout>
+      <h1>Cookie Master</h1>
+    </Layout>
+  );
 };
 
 export default HomePage;
