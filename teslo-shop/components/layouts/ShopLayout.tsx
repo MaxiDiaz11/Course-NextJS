@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import Head from "next/head";
+import { NavBar } from "../ui";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -22,7 +23,9 @@ export const ShopLayout: FC<Props> = ({
         <meta name="og:description" content={pageDescription} />
         {imageFullUrl && <meta name="og:image" content={imageFullUrl}></meta>}
       </Head>
-      <nav>{/* TODO: navbar */}</nav>
+      <nav>
+        <NavBar></NavBar>
+      </nav>
 
       {/* TODO: Sidebar */}
 
