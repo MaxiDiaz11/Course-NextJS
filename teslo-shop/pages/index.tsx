@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { ShopLayout } from "@/components/layouts";
 import { Typography } from "@mui/material";
+import { initialData } from "@/database/products";
+import ProductList from "@/components/products/ProductList";
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +16,8 @@ const Home: NextPage = () => {
       <Typography variant="h2" sx={{ mb: 1 }} component={"h2"}>
         Todos los productos
       </Typography>
+
+      <ProductList products={initialData.products as any}></ProductList>
     </ShopLayout>
   );
 };
