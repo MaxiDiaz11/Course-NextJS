@@ -1,5 +1,26 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Next.js Teslo-Shop APP
+
+Para correr localmente, se necesita la BD
+
+```
+docker-compose up -d
+```
+
+- El -d, significa _detached_
+
+MongoDB URL Local:
+mongodb://localhost:27017/teslodb
+
+##Llenar la base de datos con información de pruebas
+Llamar a:
+
+```
+http://localhost:27017/api/seed
+```
+
+
 ## Getting Started
 
 First, run the development server:
