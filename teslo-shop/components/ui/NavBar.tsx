@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Badge,
@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 import NextLink from "next/link";
 import { SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 export const NavBar = () => {
+  const page = useRouter().pathname;
+
   return (
     <AppBar>
       <Toolbar>
@@ -28,17 +31,23 @@ export const NavBar = () => {
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <NextLink href={"/category/men"} passHref legacyBehavior>
             <Link>
-              <Button>Hombres</Button>
+              <Button color={page === "/category/men" ? "primary" : "info"}>
+                Hombres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href={"/category/women"} passHref legacyBehavior>
             <Link>
-              <Button>Mujeres</Button>
+              <Button color={page === "/category/women" ? "primary" : "info"}>
+                Mujeres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href={"/category/kid"} passHref legacyBehavior>
             <Link>
-              <Button>Niños</Button>
+              <Button color={page === "/category/kid" ? "primary" : "info"}>
+                Niños
+              </Button>
             </Link>
           </NextLink>
         </Box>
